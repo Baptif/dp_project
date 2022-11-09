@@ -1,0 +1,78 @@
+import { EventManager, Observer } from "./EventManager";
+import { VeryLegacyCode, VeryLegDecoA, VeryLegDecoB } from "./Decorator";
+import { Factory } from "./Factory";
+import { createVeryLegacy } from "./DecoratorFactory";
+import { Director, ConcreteBuilder1 } from "./DecoratorBuilder";
+
+// SINGLETON + OBSERVER
+const BAD_RES = 'mauvais resultat mon reuf';
+const eventManager = EventManager.getInstannce();
+
+// const observerComptable: Observer = {
+//     update(data){
+//         console.log('observerComptable', data);
+//         if(data.result < 4){
+//             eventManager.emit('reduc sale', {salaire:2});
+//         }
+//     }
+// }
+
+// const observerDev = {
+//     update(data){
+//         console.log('observerDev', data);
+//         if(data.salaire < 3){
+//             eventManager.emit('demission', {})
+//         }
+//     }
+// }
+
+// const observerPatreon = {
+//     update(data){
+//         console.log('observerPatreon', data);
+//     }
+// }
+
+// eventManager.on(BAD_RES, observerComptable);
+// eventManager.on('reduc sale', observerDev);
+// eventManager.on('reduc sale', observerComptable);
+// eventManager.on('demission', observerPatreon);
+
+// eventManager.emit(BAD_RES, {result : 3});
+
+// DECORATION
+// const verylegcod = new VeryLegacyCode();
+
+// console.log(verylegcod.veryComplexe());
+
+// const verylegdecoa = new VeryLegDecoA(verylegcod);
+// const verylegdecob = new VeryLegDecoB(verylegdecoa);
+
+// console.log(verylegdecoa.veryComplexe());
+// console.log(verylegdecob.veryComplexe());
+
+// FACTORY
+// const facts = new Factory();
+
+// console.log(facts.createLegCode("VFLGCDAB").veryComplexe());
+
+// const verlegobs = createVeryLegacy("decoratorObs");
+// console.log(verlegobs.update);
+
+// eventManager.on(BAD_RES, verlegobs);
+// eventManager.emit(BAD_RES, {result : 3});
+
+// BUILDER (remplace la DecoratorFactory 'cassé')
+// const director = new Director();
+// const builder = new ConcreteBuilder1();
+// director.setBuilder(builder);
+
+// console.log(builder.getProduct().veryComplexe());
+
+// director.buildFullFeaturedProduct();
+// console.log(builder.getProduct().veryComplexe());
+
+// builder.produceVLCB();
+// console.log(builder.getProduct().veryComplexe());
+
+// eventManager.on(BAD_RES, builder.getProduct());
+// eventManager.emit(BAD_RES, {result : 3});

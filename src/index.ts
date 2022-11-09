@@ -1,54 +1,23 @@
-import { EventManager, Observer } from "./EventManager";
-import { VeryLegacyCode, VeryLegDecoA, VeryLegDecoB } from "./Decorator";
-import { Factory } from "./Factory";
+import { EventManager } from "./EventManager";
+import { sensorType } from "./Sensor";
+import { ISensorManufacturer,SensorManufacturerFactory } from "./SensorManufacturerFactory";
 
-// SINGLETON + OBSERVER
-// const BAD_RES = 'mauvais resultat mon reuf';
-// const eventManager = EventManager.getInstannce();
+const EVT_ACTION = "HEAT OR MOTION IS DETECTED";
 
-// const observerComptable: Observer = {
-//     update(data){
-//         console.log('observerComptable', data);
-//         if(data.result < 4){
-//             eventManager.emit('reduc sale', {salaire:2});
-//         }
-//     }
-// }
+const eventManager = EventManager.getInstannce();
 
-// const observerDev = {
-//     update(data){
-//         console.log('observerDev', data);
-//         if(data.salaire < 3){
-//             eventManager.emit('demission', {})
-//         }
-//     }
-// }
+const nasaManufact: ISensorManufacturer = SensorManufacturerFactory.createManufacturer("NASA");
+const teslaManufact: ISensorManufacturer = SensorManufacturerFactory.createManufacturer("TESLA");
 
-// const observerPatreon = {
-//     update(data){
-//         console.log('observerPatreon', data);
-//     }
-// }
+console.log("\n------------------\n");
 
-// eventManager.on(BAD_RES, observerComptable);
-// eventManager.on('reduc sale', observerDev);
-// eventManager.on('reduc sale', observerComptable);
-// eventManager.on('demission', observerPatreon);
+nasaManufact.createSensor(1,sensorType.RADAR,80);
+teslaManufact.createSensor(2,sensorType.HEAT,40);
 
-// eventManager.emit(BAD_RES, {result : 3});
+console.log("\n------------------\n");
 
-// DECORATION
-// const verylegcod = new VeryLegacyCode();
+eventManager.on(EVT_ACTION, nasaManufact.getSensor());
+eventManager.on(EVT_ACTION, teslaManufact.getSensor());
+eventManager.emit(EVT_ACTION, {value : 80});
 
-// console.log(verylegcod.veryComplexe());
-
-// const verylegdecoa = new VeryLegDecoA(verylegcod);
-// const verylegdecob = new VeryLegDecoB(verylegdecoa);
-
-// console.log(verylegdecoa.veryComplexe());
-// console.log(verylegdecob.veryComplexe());
-
-// FACTORY
-const facts = new Factory();
-
-console.log(facts.createLegCode("VFLGCDAB").veryComplexe());
+console.log("\n------------------\n");

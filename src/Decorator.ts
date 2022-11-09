@@ -1,3 +1,5 @@
+import { Observer } from "./EventManager";
+
 export interface VeryLegacy {
     veryComplexe(): string
 }
@@ -22,12 +24,21 @@ class Decorator implements VeryLegacy {
 
 export class VeryLegDecoA extends Decorator {
     public veryComplexe(): string {
-        return `${super.veryComplexe()} OOOOOOOOO`;
+        return `${super.veryComplexe()} AAAAAAAA`;
     }
 }
 
 export class VeryLegDecoB extends Decorator {
     public veryComplexe(): string {
-        return `${super.veryComplexe()} AAAAAAAAAAA`;
+        return `${super.veryComplexe()} BBBBBBBB`;
+    }
+}
+
+export class VeryLegObsDeco extends Decorator implements Observer {
+    public veryComplexe(): string {
+        return super.veryComplexe();
+    }
+    update(data: any) {
+        console.log(this.veryComplexe());
     }
 }

@@ -25,10 +25,6 @@ export class EventManager {
         this.subscribers[event].push(observable);
     }
 
-    // broadcast(data: any) {
-    //     Object.values((key: string, observables: Observer[]) => observables.forEach((observable) => observable.update(data)));
-    // }
-
     // ? veut dire que l'élement est nullable
     emit(event: string, data: any) {
         this.subscribers[event]?.forEach((observable) => observable.update(data));
