@@ -1,4 +1,4 @@
-import { VeryLegacyCode, VeryLegDecoA, VeryLegDecoB } from "../design_patterns/Decorator";
+import { VeryLegacyCode, VeryLegDecoA, VeryLegDecoB } from "./design_patterns/Decorator";
 
 interface LegacyCodeFactory{
     createLegCode();

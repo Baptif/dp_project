@@ -2,8 +2,9 @@ import { Sensor } from "./Sensor";
 import Shield from "./Shield";
 import Missile from "./Missile";
 import { Commander } from "./Command";
+import { Observer } from "./EventManager";
 
-export class Spaceship {
+export class Spaceship implements Observer{
     public name:string
     public sensor1:Sensor
     public sensor2:Sensor
@@ -24,9 +25,19 @@ export class Spaceship {
 
     private verifBuild(){
         if(this.sensor1.sensorType == this.sensor2.sensorType){
-            console.log("ERROR : The sensor have the same type\n DESTROYING",this.name)
+            throw new Error("The sensor have the same type\n DESTROYING "+this.name)
         }else{
-            console.log("🪛 Spaceship %s is assembled 🪛",this.name)
+            console.log("🪛 SPACESHIP %s IS ASSEMBLED 🪛",this.name)
+        }
+    }
+
+    update(data: any) {
+        if(data.value > 0){
+            this.commander.execute('SHIELD_ON');
+        }
+        if(data.threat){
+            this.commander.execute('SHIELD_OFF')
+            this.commander.execute('MISSILE_LAUNCH')
         }
     }
 }

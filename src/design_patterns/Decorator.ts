@@ -1,4 +1,4 @@
-import { Observer } from "../src/EventManager";
+import { Observer } from "../EventManager";
 
 export interface VeryLegacy {
     veryComplexe(): string
