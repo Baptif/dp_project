@@ -1,6 +1,6 @@
 import { Observer } from "./EventManager";
 
-import { Adapter,Adaptee } from "./Message";
+import { PrintDecoder } from "./Message";
 
 export enum sensorType {
     HEAT = "HEAT",
@@ -25,20 +25,18 @@ export class SensorDefaut implements Sensor, Observer{
     }
 
     update(event) {
+        const printDecoder = new PrintDecoder()
+
         if(this.sensorType === "HEAT"){
-            console.log("HEAT DETECTED ON SENSOR",this.sensorID, event);
+            printDecoder.show(2)
+            console.log(this.sensorID, event);
         }else if(this.sensorType === "RADAR"){
-            console.log("MOTION DETECTED ON SENSOR",this.sensorID, event);
+            printDecoder.show(3)
+            console.log(this.sensorID, event);
         }
 
-        if(event.value > this.sensorPower){ //Emplacement adapter : update ?
-            const adaptee = new Adaptee();
-            console.log("Sensor message :",adaptee.specificRequest())
-
-            console.log("DECODING MESSAGE...")
-            const adapter = new Adapter(adaptee);
-            
-            console.log(adapter.request());
+        if(event.value > this.sensorPower){
+            printDecoder.show(1);
         }
     }
 }

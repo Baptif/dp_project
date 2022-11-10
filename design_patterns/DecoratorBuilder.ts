@@ -1,5 +1,5 @@
 import { VeryLegacy, VeryLegacyCode, VeryLegDecoA, VeryLegDecoB, VeryLegObsDeco } from "./Decorator";
-import { Observer } from "./EventManager";
+import { Observer } from "../src/EventManager";
 
 interface Builder {
     produceVLCA(): void;

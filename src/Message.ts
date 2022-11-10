@@ -1,25 +1,54 @@
 class Target {
     public request(): string {
-        return 'For the crew : ! ALERT THREAT INCOMING !';
+        return "Message readable for the crew"
     }
 }
 
-export class Adaptee {
+export class SensorMessage {
+    message: number
+
+    public constructor(message:number){
+        this.message = message
+    }
+
     public specificRequest(): string {
-        return 'ISBBTEVSVCBUSFJFQVQgSU5DT01JTkcgIQ==';
+        switch (this.message) {
+            case 1:
+                return 'ISBBTEVSVCBUSFJFQVQgSU5DT01JTkcgIQ==';
+            case 2:
+                return 'SEVBVCBERVRFQ1RFRCBPTiBTRU5TT1I=';
+            case 3:
+                return 'TU9USU9OIERFVEVDVEVEIE9OIFNFTlNPUg==';
+            default:
+                break;
+        }
+        
     }
 }
 
 export class Adapter extends Target {
-    private adaptee: Adaptee;
+    private sensorMessage: SensorMessage;
 
-    constructor(adaptee: Adaptee) {
+    constructor(sensorMessage: SensorMessage) {
         super();
-        this.adaptee = adaptee;
+        this.sensorMessage = sensorMessage;
     }
 
     public request(): string {
-        const result = atob(this.adaptee.specificRequest());
-        return `Spaceship DECODER : ${result}`;
+        const result = atob(this.sensorMessage.specificRequest());
+        return `Spaceship decoder : ${result}`;
+    }
+}
+
+export class PrintDecoder {
+    public show(num:number): void{
+        console.log('')
+        const adaptee = new SensorMessage(num);
+        console.log("Sensor message :",adaptee.specificRequest())
+
+        console.log("DECODING MESSAGE...")
+        const adapter = new Adapter(adaptee);
+        
+        console.log(adapter.request());
     }
 }
