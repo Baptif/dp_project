@@ -27,7 +27,7 @@ export class Spaceship implements Observer{
         if(this.sensor1.sensorType == this.sensor2.sensorType){
             throw new Error("The sensor have the same type\n DESTROYING "+this.name)
         }else{
-            console.log("🪛 SPACESHIP %s IS ASSEMBLED 🪛",this.name)
+            console.log("SPACESHIP %s IS ASSEMBLED 🪛",this.name)
         }
     }
 

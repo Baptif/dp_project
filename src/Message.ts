@@ -40,6 +40,7 @@ export class Adapter extends Target {
     }
 }
 
+// Afficheur du texte de l'adapteur
 export class PrintDecoder {
     public show(num:number): void{
         console.log('')

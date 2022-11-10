@@ -1,5 +1,5 @@
 import { Observer,EventManager } from "./EventManager";
-import { EVT_THREAT,EVT_DO } from "./event";
+import { Events } from "./Event";
 import { PrintDecoder } from "./Message";
 
 export enum sensorType {
@@ -31,16 +31,16 @@ export class SensorDefaut implements Sensor, Observer{
         if(this.sensorType === "HEAT"){
             printDecoder.show(2)
             console.log(this.sensorID, event);
-            eventManager.emit(EVT_DO, {value : 80});
+            eventManager.emit(Events.EVT_ORDER, {value : 80});
         }else if(this.sensorType === "RADAR"){
             printDecoder.show(3)
             console.log(this.sensorID, event);
-            eventManager.emit(EVT_DO, {value : 80});
+            eventManager.emit(Events.EVT_ORDER, {value : 80});
         }
 
         if(event.value > this.sensorPower){
             printDecoder.show(1);
-            eventManager.emit(EVT_THREAT, {threat : true});
+            eventManager.emit(Events.EVT_THREAT, {threat : true});
         }
     }
 }
